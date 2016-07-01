@@ -8,7 +8,7 @@
 
 - Rails 3 or Rails 4
 
-Please note 
+Please note
 
 - <tt>BreadcrumbsOnRails</tt> 2.x requires Rails 3. Use <tt>BreadcrumbsOnRails</tt> 1.x with Rails 2.
 - <tt>BreadcrumbsOnRails</tt> doesn't work with Rails 2.1 or lower.
@@ -35,6 +35,7 @@ In your controller, call `add_breadcrumb` to push a new element on the breadcrum
 
 ```ruby
 class MyController
+  include BreadcrumbsOnRails::ActionController
 
   add_breadcrumb "home", :root_path
   add_breadcrumb "my", :my_path
@@ -117,17 +118,17 @@ If the value is a `Symbol`, the library calls the corresponding method defined i
 
 ```ruby
 class MyController
-  
+
   # The Name is set to the value returned by
   # the :root_name method.
   add_breadcrumb :root_name, "/"
-  
+
   protected
-  
+
     def root_name
       "the name"
     end
-  
+
 end
 ```
 
@@ -174,7 +175,7 @@ end
 
 class ApplicationController < ActionController::Base
   add_breadcrumb "admin", :admin_path, :if => :admin_controller?
-  
+
   def admin_controller?
     self.class.name =~ /^Admin(::|Controller)/
   end
